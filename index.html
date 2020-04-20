@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Manifest.json Generator</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Dorsa&family=Roboto&display=swap" rel="stylesheet"> 
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://kit.fontawesome.com/c685d9fea0.js" crossorigin="anonymous"></script>
+    
+    <!-- import the webpage's javascript file -->
+    <script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    
+  </head>  
+  <body class="text">
+    <div id="tutorial">
+      <p>
+        <i class="fas fa-arrow-left"></i> Set settings,<br/>
+        copy your manifest! <i class="fas fa-arrow-right"></i>
+      </p>
+      <p id="closeTutorial" onclick="document.getElementById('tutorial').style.display='none';">
+        X
+      </p>
+    </div>
+    <div style="display:flex;">
+      <div style="width:50%">
+        <div style="padding:20px 10%;" id="opts">
+          <h1 class="title">
+            Create Manifest.json
+          </h1>
+          <h2 onclick="collapse('basics')" class="click">
+            <i class="far fa-caret-square-down" id="basics-caret"></i> Basics
+          </h2>
+          <div id="basics" class="options">
+            <label>Addon Title</label>
+            <input type="text" placeholder="My Awesome Addon" id="addonName">
+            <i>Try to keep it less than 20 characters long</i>
+            <label>Description</label>
+            <input type="text" placeholder="Makes pigs fly!" id="addonDesc">
+            <i>Make it short and descriptive. Put your name in there!</i>
+            <label>Version <span class="optional">(Optional)</span></label>
+            <input type="number" placeholder="1" min="0" class="version-first" id="v1">
+            <input type="number" placeholder="0" min="0" class="version-second" id="v2">
+            <input type="number" placeholder="0" min="0" class="version-last" id="v3">
+            <i>You can use <a href="https://semver.org/" target="_blank">Semantic Versioning</a> to make it easier to understand</i>
+            <label>UUID<span class="optional">(Advanced)</span></label>
+            <input type="text" placeholder="" id="addonUuid" pattern="/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i">
+            <i>Just a quick ID to identify your addon. Leave this at default if you don't have your own UUID</i>
+          </div>
+          <h2 onclick="collapse('modules')" class="click">
+            <i class="far fa-caret-square-right" id="modules-caret"></i> Modules
+          </h2>
+          <div id="modules" class="options" style="display:none;">
+            <label class="click"><input type="checkbox" style="width:initial;" onchange="showModule('resource',this.checked);" id="useResources">Use Resource Pack</label>
+            <div id="resource" style="display:none;" class="options">
+              <label>Description</label>
+              <input type="text" placeholder="Makes pigs have wings!" id="resdesc">
+              <i>Make it short and descriptive. Put your name in there!</i>
+              <label>Version <span class="optional">(Optional)</span></label>
+              <input type="number" placeholder="1" min="0" class="version-first" id="resv1">
+              <input type="number" placeholder="0" min="0" class="version-second" id="resv2">
+              <input type="number" placeholder="0" min="0" class="version-last" id="resv3">
+              <i>You can use <a href="https://semver.org/" target="_blank">Semantic Versioning</a> to make it easier to understand</i>
+              <label>UUID<span class="optional">(Advanced)</span></label>
+              <input type="text" placeholder="" id="resUuid" pattern="/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i">
+              <i>Just a quick ID to identify your addon. Leave this at default if you don't have your own UUID</i>
+            </div>
+            <label class="click"><input type="checkbox" style="width:initial;" onchange="showModule('behaviour',this.checked);" id="useBehaviour">Use Behaviour Packs</label>
+            <div id="behaviour" style="display:none;" class="options">
+              <label>Description</label>
+              <input type="text" placeholder="Gives pigs Flying AI" id="behdesc">
+              <i>Make it short and descriptive. Put your name in there!</i>
+              <label>Version <span class="optional">(Optional)</span></label>
+              <input type="number" placeholder="1" min="0" class="version-first" id="behv1">
+              <input type="number" placeholder="0" min="0" class="version-second" id="behv2">
+              <input type="number" placeholder="0" min="0" class="version-last" id="behv3">
+              <i>You can use <a href="https://semver.org/" target="_blank">Semantic Versioning</a> to make it easier to understand</i>
+              <label>UUID<span class="optional">(Advanced)</span></label>
+              <input type="text" placeholder="" id="behUuid" pattern="/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i">
+              <i>Just a quick ID to identify your addon. Leave this at default if you don't have your own UUID</i>
+            </div>
+            <label class="click"><input type="checkbox" style="width:initial;" onchange="showModule('scripts',this.checked);" id="useScripts">Use Client Scripts</label>
+            <div id="scripts" style="display:none;" class="options">
+              <label>Description</label>
+              <input type="text" placeholder="Gives pigs Flying AI" id="srcdesc">
+              <i>Make it short and descriptive. Put your name in there!</i>
+              <label>Version <span class="optional">(Optional)</span></label>
+              <input type="number" placeholder="1" min="0" class="version-first" id="srcv1">
+              <input type="number" placeholder="0" min="0" class="version-second" id="srcv2">
+              <input type="number" placeholder="0" min="0" class="version-last" id="srcv3">
+              <i>You can use <a href="https://semver.org/" target="_blank">Semantic Versioning</a> to make it easier to understand</i>
+              <label>UUID<span class="optional">(Advanced)</span></label>
+              <input type="text" placeholder="" id="srcUuid" pattern="/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i">
+              <i>Just a quick ID to identify your addon. Leave this at default if you don't have your own UUID</i>
+            </div>
+            <label class="click"><input type="checkbox" style="width:initial;" onchange="showModule('interfaces',this.checked);" id="useInterface">Use Interfaces</label>
+            <div id="interfaces" style="display:none;" class="options">
+              <label>Description</label>
+              <input type="text" placeholder="Gives pigs a HUD" id="intdesc">
+              <i>Make it short and descriptive. Put your name in there!</i>
+              <label>Version <span class="optional">(Optional)</span></label>
+              <input type="number" placeholder="1" min="0" class="version-first" id="intv1">
+              <input type="number" placeholder="0" min="0" class="version-second" id="intv2">
+              <input type="number" placeholder="0" min="0" class="version-last" id="intv3">
+              <i>You can use <a href="https://semver.org/" target="_blank">Semantic Versioning</a> to make it easier to understand</i>
+              <label>UUID<span class="optional">(Advanced)</span></label>
+              <input type="text" placeholder="" id="intUuid" pattern="/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i">
+              <i>Just a quick ID to identify your addon. Leave this at default if you don't have your own UUID</i>
+            </div>
+            <label class="click"><input type="checkbox" style="width:initial;" onchange="showModule('world',this.checked);" id="useWorld">Use a World Template</label>
+            <div id="world" style="display:none;" class="options">
+              <label>Description</label>
+              <input type="text" placeholder="Gives pigs world" id="wlddesc">
+              <i>Make it short and descriptive. Put your name in there!</i>
+              <label>Version <span class="optional">(Optional)</span></label>
+              <input type="number" placeholder="1" min="0" class="version-first" id="wldv1">
+              <input type="number" placeholder="0" min="0" class="version-second" id="wldv2">
+              <input type="number" placeholder="0" min="0" class="version-last" id="wldv3">
+              <i>You can use <a href="https://semver.org/" target="_blank">Semantic Versioning</a> to make it easier to understand</i>
+              <label>UUID<span class="optional">(Advanced)</span></label>
+              <input type="text" placeholder="" id="wldUuid" pattern="/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i">
+              <i>Just a quick ID to identify your addon. Leave this at default if you don't have your own UUID</i>
+            </div>
+          </div>
+          <h2 onclick="collapse('depend')" class="click">
+            <i class="far fa-caret-square-right" id="depend-caret"></i> Dependancies
+          </h2>
+          <div id="depend" class="options" style="display:none;">
+            <div id="allDepends">
+              
+            </div>
+            <span onclick="addDependancy()" class="click">
+              <i class="far fa-plus-square" style="color:green;display:initial;font-size:16px;"></i> Add Dependancy
+            </span>
+          </div>
+          <h2 onclick="collapse('capable')" class="click">
+            <i class="far fa-caret-square-right" id="capable-caret"></i> Capabilities
+          </h2>
+          <div id="capable" class="options" style="display:none;">
+            <label class="click"><input type="checkbox" style="width:initial;" id="expUI" onchange="recalc();">Experimental UI</label>
+            <label class="click"><input type="checkbox" style="width:initial;" id="chem" onchange="recalc();">Chemistry</label>
+          </div>
+          <h2 onclick="collapse('meta')" class="click">
+            <i class="far fa-caret-square-right" id="meeta-caret"></i> Metadata
+          </h2>
+          <div id="meta" class="options" style="display:none;">
+            <label class="click"><input type="checkbox" style="width:initial;" onchange="showModule('metaAuthor',this.checked);" id="useauthor">Add an Author</label>
+            <div id="metaAuthor" style="display:none;" class="options">
+              <label>Your Name</label>
+              <input type="text" placeholder="Notch" id="myname">
+              <i>Put down your username, twitter, anything that identifies you!</i>
+            </div>
+            <label class="click"><input type="checkbox" style="width:initial;" onchange="showModule('metaLicense',this.checked);" id="uselicense">Use a License</label>
+            <div id="metaLicense" style="display:none;" class="options">
+              <label>Licensing</label>
+              <input type="text" placeholder="MPL 2.0" id="mylicense">
+              <i>Not sure? Pick one out at <a href="https://choosealicense.com/">Choose a License</a></i>
+            </div>
+            <label class="click"><input type="checkbox" style="width:initial;" onchange="showModule('webLicense',this.checked);" id="useweb">Add a Website</label>
+            <div id="webLicense" style="display:none;" class="options">
+              <label>Your Website</label>
+              <input type="text" placeholder="www.minecraft.com/" id="myweb">
+              <i>Do you have a website? A Github? A Discord server? Put it here!</i>
+            </div>
+          </div>
+          <footer style="position:relative;bottom:0;">
+            <span class="click">
+              Made by Ronan Finley (Dr. Yamok)
+            </span>
+          </footer>
+        </div>
+      </div>
+          <div style="width:50%;">
+            <div style="position: sticky;top: 0;">
+              <code style="font-size:18px;"> > manifest.json</code>
+        <div id="code-editor">{
+  "format_version": 2,
+  "header": {
+    "name": "",
+    "description": "",
+    "uuid": "",
+    "version": [
+      1,
+      0,
+      0
+    ]
+  },
+  "modules": [
+  ]
+}</div>
+            </div>
+            
+      </div>
+    </div>
+    <script src="https://button.glitch.me/button.js"></script>
+    <script>
+      let dependancies = [];
+      function addDependancy() {
+        dependancies.push({uuid:"",version:[1,0,0]});
+        flushDependancies();
+      }
+      function flushDependancies() {
+        var construct = "";
+        for(var i = 0; i < dependancies.length; i++) {
+          construct+="<div><label>UUID</label><input type=\"input\" placeholder=\"UUID of dependancy\" onkeyup=\"modifyDependancy("+i+")\" id=\"depend-"+i+"\" value=\""+dependancies[i].uuid+"\"><label>Required Version</label><input type=\"number\" placeholder=\"1\" min=\"0\" class=\"version-first\" onkeyup=\"modifyDependancy("+i+")\" id=\"depend-v1-"+i+"\" value=\""+dependancies[i].version[0]+"\"><input type=\"number\" placeholder=\"0\" min=\"0\" class=\"version-second\" onkeyup=\"modifyDependancy("+i+")\" id=\"depend-v2-"+i+"\" value=\""+dependancies[i].version[1]+"\"><input type=\"number\" placeholder=\"0\" min=\"0\" class=\"version-last\" onkeyup=\"modifyDependancy(+"+i+")\" id=\"depend-v3-"+i+"\" value=\""+dependancies[i].version[2]+"\"><p onclick=\"deleteDepend("+i+")\" class=\"click\"><i class=\"far fa-trash-alt\" style=\"color:red;display:initial;font-size:16px;\"></i> Remove Dependancy</p>";
+        }
+        document.getElementById("allDepends").innerHTML = construct;
+        recalc();
+      }
+      function modifyDependancy(id) {
+        dependancies[id] = {uuid:qv("depend-"+id),version:[qv("depend-v1-"+id),qv("depend-v2-"+id),qv("depend-v3-"+id)]};
+        recalc();
+      }
+      function deleteDepend(id) {
+        dependancies.splice(id,1);
+        flushDependancies();
+      }
+      function collapse(id) {
+        if(document.getElementById(id).style.display=='none') {
+          document.getElementById(id).style.display = 'block';
+          document.getElementById(id+"-caret").className = "far fa-caret-square-down";
+        } else {
+          document.getElementById(id).style.display = 'none';
+          document.getElementById(id+"-caret").className = "far fa-caret-square-right";
+        }
+      }
+      function showModule(id,bool) {
+        recalc();
+        if(bool) {
+          document.getElementById(id).style.display = 'block';
+        } else {
+          document.getElementById(id).style.display = 'none';
+        }
+      }
+      function qv(id) {
+        return document.getElementById(id).value || document.getElementById(id).placeholder;
+      }
+      let structure = `{
+  "format_version": 2,
+  "header": {
+    "name": "$NAME",
+    "description": "$DESCRIPTION",
+    "uuid": "$UUID",
+    "version": [$VERSION1, $VERSION2, $VERSION3]
+  },
+  "modules": [$MODULES
+  ]$DEPENDS$CAPABLE$METADATA
+}`;
+      function recalc() {
+        var construct =   structure.replace("$NAME",qv("addonName"))
+                                   .replace("$DESCRIPTION",qv('addonDesc'))
+                                   .replace("$UUID",qv('addonUuid'))
+                                   .replace("$VERSION1",qv('v1'))
+                                   .replace("$VERSION2",qv('v2'))
+                                   .replace("$VERSION3",qv('v3'))
+        var modules = [];
+        if(document.getElementById("useResources").checked) {
+          modules.push(`\n\t{\n\t\t"description": "${qv('resdesc')}",\n\t\t"type": "resources",\n\t\t"uuid": "${qv('resUuid')}",\n\t\t"version": [${qv('resv1')}, ${qv('resv2')}, ${qv('resv3')}]\n\t}`);
+        }
+        if(document.getElementById("useBehaviour").checked) {
+          modules.push(`\n\t{\n\t\t"description": "${qv('behdesc')}",\n\t\t"type": "data",\n\t\t"uuid": "${qv('behUuid')}",\n\t\t"version": [${qv('behv1')}, ${qv('behv2')}, ${qv('behv3')}]\n\t}`);
+        }
+        if(document.getElementById("useScripts").checked) {
+          modules.push(`\n\t{\n\t\t"description": "${qv('srcdesc')}",\n\t\t"type": "client_data",\n\t\t"uuid": "${qv('srcUuid')}",\n\t\t"version": [${qv('srcv1')}, ${qv('srcv2')}, ${qv('srcv3')}]\n\t}`);
+        }
+        if(document.getElementById("useInterface").checked) {
+          modules.push(`\n\t{\n\t\t"description": "${qv('intdesc')}",\n\t\t"type": "interface",\n\t\t"uuid": "${qv('intUuid')}",\n\t\t"version": [${qv('intv1')}, ${qv('intv2')}, ${qv('intv3')}]\n\t}`);
+        }
+        if(document.getElementById("useWorld").checked) {
+          modules.push(`\n\t{\n\t\t"description": "${qv('behdesc')}",\n\t\t"type": "world_template",\n\t\t"uuid": "${qv('behUuid')}",\n\t\t"version": [${qv('behv1')}, ${qv('behv2')}, ${qv('behv3')}]\n\t}`);
+        }
+        construct = construct.replace("$MODULES",modules.join(","));
+        
+        var depends = "";
+        if(dependancies.length>0) {
+          depends = ",\n\t\"dependencies\": [";
+          for(var i = 0; i < dependancies.length; i++) {
+            depends+="\n\t\t{\n\t\t\t\"uuid\": \""+dependancies[i].uuid+"\",\n\t\t\t\"version\": "+JSON.stringify(dependancies[i].version)+"\n\t\t}";
+            if(i!=dependancies.length-1) depends+=","
+          }
+          depends+="\n\t]";
+        }
+        construct = construct.replace("$DEPENDS",depends);
+        
+        var capable = [];
+        if(document.getElementById("expUI").checked) {
+          capable.push("\n\t\t\"experimental_custom_ui\"");
+        }
+        if(document.getElementById("chem").checked) {
+          capable.push("\n\t\t\"chemistry\"");
+        }
+        if(capable.length!=0) {
+          construct = construct.replace("$CAPABLE",",\n\t\"capabilities\": ["+capable.join(",")+"\n\t]");
+        }else {
+          construct = construct.replace("$CAPABLE","");
+        }
+        
+        var metadata = [];
+        if(document.getElementById("useauthor").checked) {
+          var auths = "\"authors\": \""+qv("myname")+"\"";
+          metadata.push(auths)
+        }
+        if(document.getElementById("uselicense").checked) {
+          var pusher = "";
+          pusher+="\"license\": \""+qv("mylicense")+"\"";
+          metadata.push(pusher);
+        }
+        if(document.getElementById("useweb").checked) {
+          var pusher = "";
+          pusher+="\"url\": \""+qv("myweb")+"\"";
+          metadata.push(pusher);
+        }
+        if(metadata.length>0) {
+          construct = construct.replace("$METADATA",",\n\t\"metadata\": {\n\t\t"+metadata.join(",\n\t\t")+"\n\t}");
+        } else {
+          construct = construct.replace("$METADATA","");
+        }
+        
+        
+        var pos = editor.session.selection.toJSON()
+        editor.session.setValue(construct)
+        editor.session.selection.fromJSON(pos)
+      }
+      function create_UUID(){
+        var dt = new Date().getTime();
+        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = (dt + Math.random()*16)%16 | 0;
+            dt = Math.floor(dt/16);
+            return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+        });
+        return uuid;
+    }
+      let editor;
+      window.onload = function() {
+        editor = ace.edit("code-editor");
+        editor.setTheme("ace/theme/github");
+        editor.session.setMode("ace/mode/json");
+        editor.session.setTabSize(2)
+        
+        document.getElementById("addonUuid").placeholder = create_UUID();
+        document.getElementById("resUuid").placeholder = create_UUID();
+        document.getElementById("behUuid").placeholder = create_UUID();
+        document.getElementById("srcUuid").placeholder = create_UUID();
+        document.getElementById("intUuid").placeholder = create_UUID();
+        document.getElementById("wldUuid").placeholder = create_UUID();
+        recalc();
+        var inputs = document.getElementById("opts").getElementsByTagName("input");
+        for(var i = 0; i < inputs.length; i++) {
+          inputs[i].addEventListener("keyup", recalc);
+        }
+      }
+    </script>
+  </body>
+</html>
