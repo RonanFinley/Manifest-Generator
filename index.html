@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css2?family=Dorsa&family=Roboto&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Scheherazade&family=Roboto&display=swap" rel="stylesheet"> 
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="/style.css">
     <script src="https://kit.fontawesome.com/c685d9fea0.js" crossorigin="anonymous"></script>
@@ -18,7 +18,7 @@
     <div id="tutorial">
       <p>
         <i class="fas fa-arrow-left"></i> Set settings,<br/>
-        copy your manifest! <i class="fas fa-arrow-right"></i>
+        Copy your manifest! <i class="fas fa-arrow-right"></i>
       </p>
       <p id="closeTutorial" onclick="document.getElementById('tutorial').style.display='none';">
         X
@@ -125,14 +125,14 @@
             </div>
           </div>
           <h2 onclick="collapse('depend')" class="click">
-            <i class="far fa-caret-square-right" id="depend-caret"></i> Dependancies
+            <i class="far fa-caret-square-right" id="depend-caret"></i> Dependencies
           </h2>
           <div id="depend" class="options" style="display:none;">
             <div id="allDepends">
               
             </div>
             <span onclick="addDependancy()" class="click">
-              <i class="far fa-plus-square" style="color:green;display:initial;font-size:16px;"></i> Add Dependancy
+              <i class="far fa-plus-square" style="color:green;display:initial;font-size:16px;"></i> Add Dependency
             </span>
           </div>
           <h2 onclick="collapse('capable')" class="click">
@@ -204,7 +204,7 @@
       function flushDependancies() {
         var construct = "";
         for(var i = 0; i < dependancies.length; i++) {
-          construct+="<div><label>UUID</label><input type=\"input\" placeholder=\"UUID of dependancy\" onkeyup=\"modifyDependancy("+i+")\" id=\"depend-"+i+"\" value=\""+dependancies[i].uuid+"\"><label>Required Version</label><input type=\"number\" placeholder=\"1\" min=\"0\" class=\"version-first\" onkeyup=\"modifyDependancy("+i+")\" id=\"depend-v1-"+i+"\" value=\""+dependancies[i].version[0]+"\"><input type=\"number\" placeholder=\"0\" min=\"0\" class=\"version-second\" onkeyup=\"modifyDependancy("+i+")\" id=\"depend-v2-"+i+"\" value=\""+dependancies[i].version[1]+"\"><input type=\"number\" placeholder=\"0\" min=\"0\" class=\"version-last\" onkeyup=\"modifyDependancy(+"+i+")\" id=\"depend-v3-"+i+"\" value=\""+dependancies[i].version[2]+"\"><p onclick=\"deleteDepend("+i+")\" class=\"click\"><i class=\"far fa-trash-alt\" style=\"color:red;display:initial;font-size:16px;\"></i> Remove Dependancy</p>";
+          construct+="<div><label>UUID</label><input type=\"input\" placeholder=\"UUID of dependancy\" onkeyup=\"modifyDependancy("+i+")\" id=\"depend-"+i+"\" value=\""+dependancies[i].uuid+"\"><label>Required Version</label><input type=\"number\" placeholder=\"1\" min=\"0\" class=\"version-first\" onkeyup=\"modifyDependancy("+i+")\" id=\"depend-v1-"+i+"\" value=\""+dependancies[i].version[0]+"\"><input type=\"number\" placeholder=\"0\" min=\"0\" class=\"version-second\" onkeyup=\"modifyDependancy("+i+")\" id=\"depend-v2-"+i+"\" value=\""+dependancies[i].version[1]+"\"><input type=\"number\" placeholder=\"0\" min=\"0\" class=\"version-last\" onkeyup=\"modifyDependancy(+"+i+")\" id=\"depend-v3-"+i+"\" value=\""+dependancies[i].version[2]+"\"><p onclick=\"deleteDepend("+i+")\" class=\"click\"><i class=\"far fa-trash-alt\" style=\"color:red;display:initial;font-size:16px;\"></i> Remove Dependency</p>";
         }
         document.getElementById("allDepends").innerHTML = construct;
         recalc();
