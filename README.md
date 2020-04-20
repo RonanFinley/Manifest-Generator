@@ -1,37 +1,20 @@
-Welcome to Glitch
-=================
+Minecraft Manifest Generator
+============================
+A quick way to dynamically create Minecraft addon manifests, fully featured for format version 2
 
-Click `Show` in the header to see your app live. Updates to your code will instantly deploy and update live.
+Running
+-------
+Open index.html in your browser, or upload the entire folder to a web server.
 
-**Glitch** is the friendly community where you'll build the app of your dreams. Glitch lets you instantly create, remix, edit, and host an app, bot or site, and you can invite collaborators or helpers to simultaneously edit code with you.
+BUGS
+----
+Go to the Issues tab
 
-Find out more [about Glitch](https://glitch.com/about).
-
-
-Your Project
+CONTRIBUTING
 ------------
+Fork this repo, make your changes, make a pull request.  
+For larger changes, please make an issue
 
-### ← README.md
-
-That's this file, where you can tell people what your cool website does and how you built it.
-
-### ← index.html
-
-Where you'll write the content of your website. 
-
-### ← style.css
-
-CSS files add styling rules to your content.
-
-### ← script.js
-
-If you're feeling fancy you can add interactivity to your site with JavaScript.
-
-### ← assets
-
-Drag in `assets`, like images or music, to add them to your project
-
-Made by [Glitch](https://glitch.com/)
--------------------
-
-\ ゜o゜)ノ
+LICENSE
+-------
+Mozilla Public License 2.0
