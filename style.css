@@ -5,7 +5,7 @@ body {
   margin: 0;
 }
 .title {
-  font-family: 'Dorsa', sans-serif;
+  font-family: 'Scheherazade', serif;
   font-size:52px;
 }
 .text {
@@ -21,6 +21,7 @@ body {
   width: 500px;
   clear: both;
   border-left:1px dotted black;
+  margin-bottom:18px;
 }
 .options label {
   width:100%;
