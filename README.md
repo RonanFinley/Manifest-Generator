@@ -18,3 +18,5 @@ For larger changes, please make an issue
 LICENSE
 -------
 Mozilla Public License 2.0
+
+This contains the ace-builds folder, a release of the [Ace editor](https://github.com/ajaxorg/ace), licensed under BSD
