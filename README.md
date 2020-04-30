@@ -4,7 +4,8 @@ A quick way to dynamically create Minecraft addon manifests, fully featured for 
 
 Running
 -------
-Open index.html in your browser, or upload the entire folder to a web server.
+Open index.html in your browser, or upload the entire folder to a web server.  
+Alternatively, open up the GitHub Page in your browser: [https://ronanfinley.github.io/Manifest-Generator/](https://ronanfinley.github.io/Manifest-Generator/)
 
 BUGS
 ----
